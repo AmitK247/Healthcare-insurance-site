@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import image from '../../img/Repeat_Grid_5.png';
 import image1 from '../../img/Icon_feather-check-circle.png';
@@ -7,318 +7,90 @@ import image2 from '../../img/Icon_feather-clock.png';
 const Web3 = require('web3');
 const web3 = new Web3('http://localhost:8545');
 
+
+
 function createDataset() {
+
+   
   console.log('createDataset function called');
 
   // Get form values
-  const medA = document.getElementById('medA').value;
-  const medB = document.getElementById('medB').value;
-  const medC = document.getElementById('medC').value;
-  const medD = document.getElementById('medD').value;
-  const claimAmount = document.getElementById('claimAmount').value;
+  const beneficiaryId = document.getElementById('beneficiaryId').value;
+  const age = parseInt(document.getElementById('age').value);
+  const physician = document.getElementById('physician').value;
+  const admittedDays = parseInt(document.getElementById('admittedDays').value);
+  const claimAmount = parseInt(document.getElementById('claimAmount').value);
+  // const renalDisease = checkboxValues.renalDisease;
+  // const alzheimer = checkboxValues.alzheimer;
+  const HeartFail = document.getElementById('HeartFail').value;
+  const kidneyDisease = document.getElementById('kidneyDisease').value;
+  const cancer = document.getElementById('cancer').value;
+  const Pulmonary = document.getElementById('Pulmonary').value;
+  const stroke = document.getElementById('stroke').value;
+  const osteoporosis = document.getElementById('osteoporosis').value;
+  const ischemicHeart = document.getElementById('ischemicHeart').value;
+  const diabetes = document.getElementById('diabetes').value;
 
   // Create a dataset object
   const dataset = [{
-      "Medication A": medA,
-      "Medication B": medB,
-      "Medication C": medC,
-      "Medication D": medD
+      "BeneID": beneficiaryId,
+      "Age": age,
+      "ClaimAmt":claimAmount,
+      "AttendingPhysician": physician,
+      "AdmitForDays": admittedDays,
+      // "RenalDiseaseIndicator": renalDisease,
+      // "ChronicCond_Alzheimer": alzheimer,
+      "ChronicCond_HeartFailure": HeartFail,
+      "ChronicCond_KidneyDisease": kidneyDisease,
+      "ChronicCond_Cancer": cancer,
+      "ChronicCond_ObstrPulmonary": Pulmonary,
+      "ChronicCond_Stroke": stroke,
+      "ChronicCond_Osteoporosis": osteoporosis,
+      "ChronicCond_IschemicHeart": ischemicHeart,
+      "ChronicCond_Diabetes": diabetes
   }];
-  console.log(dataset);
 
-  // Convert the dataset object to JSON string
-  // const datasetJson = JSON.stringify(dataset);
-  var fs = require('fs'),
-    RandomForestClassifier = require('random-forest-classifier').RandomForestClassifier;
 
-var data=[
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 500
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1000
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 0,
-        "Insurance claiming amount": 750
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 1,
-        "Insurance claiming amount": 900
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 600
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1200
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 500
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1000
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 0,
-        "Insurance claiming amount": 750
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 1,
-        "Insurance claiming amount": 900
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 600
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1200
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 500
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1000
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 0,
-        "Insurance claiming amount": 750
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 1,
-        "Insurance claiming amount": 900
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 600
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1200
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 1,
-        "Medication C": 1,
-        "Medication D": 0,
-        "Insurance claiming amount": 500
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 0,
-        "Medication C": 0,
-        "Medication D": 1,
-        "Insurance claiming amount": 1000
-    },
-    {
-        "Medication A": 1,
-        "Medication B": 1,
-        "Medication C": 0,
-        "Medication D": 0,
-        "Insurance claiming amount": 750
-    },
-    {
-        "Medication A": 0,
-        "Medication B": 0,
-        "Medication C": 1,
-        "Medication D": 1,
-        "Insurance claiming amount": 900
-    }]
 
-var rf = new RandomForestClassifier({
-    n_estimators: 10
-});
 
-rf.fit(data, null, "Insurance claiming amount", function(err, trees){
-  //console.log(JSON.stringify(trees, null, 4));
-  var pred = rf.predict(dataset, trees);
-  if(pred[0]>=claimAmount){
-    alert("Transaction Successful");
-    const contractAddress = "0x244D32d32ca3bD0f746A356FDD1C8591449B655C"; // Replace with your smart contract address
-    const contractABI = [
-      {
-        "inputs": [
-          {
-            "internalType": "uint8",
-            "name": "_medicationA",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint8",
-            "name": "_medicationB",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint8",
-            "name": "_medicationC",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint8",
-            "name": "_medicationD",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint256",
-            "name": "ClaimingAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "predictedClaimingAmount",
-            "type": "uint256"
-          }
-        ],
-        "name": "addRecord",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_id",
-            "type": "uint256"
-          }
-        ],
-        "name": "getRecord",
-        "outputs": [
-          {
-            "internalType": "uint8",
-            "name": "",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint8",
-            "name": "",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint8",
-            "name": "",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint8",
-            "name": "",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "getRecordCount",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ]; // Replace with your smart contract ABI
 
-    const contractInstance = new web3.eth.Contract(contractABI, contractAddress);
-
-    contractInstance.methods.addRecord(medA, medB, medC, medD, claimAmount, pred[0])
-    .send({ from: "0x5dFAE6Ddf52f4D2cEDB8018641dF5814f4eb3e29", gas: '3000000' })
-    .then(receipt => {
-      console.log('Transaction successful:', receipt);
-    })
-    .catch(error => {
-      console.error('Failed to send transaction to smart contract:', error);
-    });
-    }
-    else{
-      alert("Transaction Unsuccessful")
-    }
-
-  console.log(pred);
-
-  // pred = ["virginia, "setosa"]
-});
-
-  // Display the JSON string
-}
+  console.log(dataset);}
 
 const Claims = () => {
+  
+  // const [checkboxValues, setCheckboxValues] = useState({
+  //   renalDisease: 0,
+  //   alzheimer: 0,
+  //   HeartFail: 0,
+  //   kidneyDisease: 0,
+  //   cancer: 0,
+  //   Pulmonary: 0,
+  //   stroke: 0,
+  //   osteoporosis: 0,
+  //   ischemicHeart: 0,
+  //   diabetes: 0,
+  // });
+
+  // // Handle checkbox change event
+  // const handleCheckboxChange = (event) => {
+  //   const { id, checked } = event.target;
+  //   const updatedValues = {
+  //     ...checkboxValues,
+  //     [id]: checked ? 1 : 0,
+  //   };
+  //   setCheckboxValues(updatedValues);
+  //   console.log(updatedValues);
+  //   createDataset(checkboxValues);
+   
+  // };
+
+  // Handle form submission
+
+
+
+
+
+
   return (
 
       <div className='insure '>
@@ -335,37 +107,11 @@ const Claims = () => {
             <div class="register2">
             <div class="register1">
             
-          <form id="myForm">
+          <form id="myForm" >
           <label for="beneficiaryId">Beneficiary ID:</label>
           <input class ="cl" type="text" id="beneficiaryId" />
           <label class="cl" for="age"> Age:</label>
           <input type="number" id="age" class="cl" /><br></br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* <input type="number" id="age" value={age} onChange={event => setAge(event.target.value)} />
     <label for="medA">Medication A:</label>
@@ -385,7 +131,58 @@ const Claims = () => {
     </select><p></p>
     <label for="admittedDays">Admitted for days:</label>
       <input type="number" id="admittedDays" class ="cl"/><br></br>
-      <label>Select Diseases:</label><br></br>
+      {/* <label>Select Diseases:</label><br></br>
+      <label for="RD"> RenalDisease: </label>
+      <select  class = "insure2" id="physician01" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select>
+      <label for="al"> alzheimer: </label>
+      <select  class = "insure2" id="physician1" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select><br></br>
+      <label for="hf"> HeartFail: </label>
+      <select  class = "insure2" id="physician2" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select>
+      <label for ="k"> kidneyDisease: </label>
+      <select  class = "insure2" id="physician3" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select><br></br>
+      <label for ="c"> cancer: </label>
+      <select  class = "insure2" id="physician4" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select>
+      <label for="pu">Pulmonary: </label>
+      <select  class = "insure2" id="physician5" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select><br></br>
+      <label for="s"> stroke: </label>
+      <select  class = "insure2" id="physician7" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select>
+      <label for ="o"> osteoporosis: </label>
+      <select  class = "insure2" id="physician8" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select><br></br>
+      <label for ="i"> ischemicHeart: </label>
+      <select  class = "insure2" id="physician9" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select>
+      <label for="d"> diabetes </label>
+      <select  class = "insure2" id="physician10" >
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select><br></br> */}
+    <label>Select Diseases:</label><br></br>
       <label><input type="checkbox" id="renalDisease"  /> RenalDisease </label><br></br>
       <label><input type="checkbox" id="alzheimer"  /> alzheimer </label><br></br>
       <label><input type="checkbox" id="HeartFail"  /> HeartFail </label><br></br>
@@ -427,3 +224,4 @@ const Claims = () => {
 //   // Add event listener to the submit button
 //   document.getElementById('submitButton').addEventListener('click', createDataset);});
 export default Claims;
+
